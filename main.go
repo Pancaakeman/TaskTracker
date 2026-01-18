@@ -1,11 +1,14 @@
-package taskTracker
+package main
 
-type Task struct {
-	Name    string
-	Desc    string
-	Urgency string
-	Group   string
+import "taskTracker/internal"
+
+func main() {
+	myTask := internal.Task{
+		Name:    "Task1",
+		Desc:    "Task but its 1",
+		Urgency: "Now or never",
+		Group:   "idk",
+	}
+	internal.AddTask(myTask)
+	internal.ListTasks()
 }
-
-var TaskIndex = make(map[string]int)
-var TaskList = make([]Task, 0)

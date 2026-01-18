@@ -3,24 +3,32 @@ package internal
 import (
 	"fmt"
 	"slices"
-	task "taskTracker"
 )
 
-func AddTask(newTask task.Task) {
+func AddTask(newTask Task) {
 
-	task.TaskList = append(task.TaskList, newTask)
-	task.TaskIndex[newTask.Name] = len(task.TaskIndex) - 1
-	fmt.Printf("Task: %v Added to list", newTask.Name)
+	TaskList = append(TaskList, newTask)
+	TaskIndex[newTask.Name] = len(TaskIndex) - 1
+	fmt.Printf("Task: %v Added to list\n", newTask.Name)
 }
-func DeleteTask(Oldtask task.Task) {
-	i, exists := task.TaskIndex[Oldtask.Name]
+func DeleteTask(Oldtask Task) {
+	i, exists := TaskIndex[Oldtask.Name]
 	if !exists {
-		fmt.Printf("Given Task does not exist!")
+		fmt.Printf("Given Task does not exist!\n")
 		return
 	}
-	task.TaskList = slices.Delete(task.TaskList, i, i)
+	TaskList = slices.Delete(TaskList, i, i)
+	delete(TaskIndex, Oldtask.Name)
 
 }
-func EditTask(oldTask task.Task, newTask task.Task) {
+func EditTask(oldTask Task, newTask Task) {
+	i, exists := TaskIndex[oldTask.Name]
+	if !exists {
+		fmt.Printf("Task to Edit doesn't exist")
+		return
+	}
+	TaskList[i] = newTask
+	delete(TaskIndex, oldTask.Name)
+	TaskIndex[newTask.Name] = len(TaskIndex) - 1
 
 }

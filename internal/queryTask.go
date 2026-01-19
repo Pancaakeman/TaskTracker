@@ -12,7 +12,7 @@ func ListTasks() {
 	}
 
 	for i, task := range TaskList {
-		fmt.Printf("%v Task Name: %v \nTask Description: %v \nTask Urgency: %v \nTask Group: %v \n", i, task.Name, task.Desc, task.Urgency, task.Group)
+		fmt.Printf("Task Num: %v\nTask Name: %v \nTask Description: %v \nTask Urgency: %v \n", i+1, task.Name, task.Desc, task.Urgency)
 	}
 }
 func GetTaskWithName(name string) int {

@@ -1,14 +1,20 @@
 package main
 
-import "taskTracker/internal"
+import (
+	"context"
+	"os"
+	"taskTracker/cmds"
+
+	"github.com/urfave/cli/v3"
+)
 
 func main() {
-	myTask := internal.Task{
-		Name:    "Task1",
-		Desc:    "Task but its 1",
-		Urgency: "Now or never",
-		Group:   "idk",
+	cmd := &cli.Command{
+		Name:        "help",
+		Usage:       "help",
+		Description: "TaskTracker is a simple task keeping application written in Go\nOffers simple features to Add, Delete, Edit and Query Tasks",
+		Commands:    cmds.Commands(),
 	}
-	internal.AddTask(myTask)
-	internal.ListTasks()
+	cmd.Run(context.Background(), os.Args)
+
 }
